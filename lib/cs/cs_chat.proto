@@ -1,0 +1,38 @@
+import "com/com_def.proto";
+package proto.cs;
+
+enum CmdCodeChat
+{
+	CC_CHAT_SEND_REQ = 1;
+	CC_CHAT_SEND_RES = 2;
+	CC_CHAT_SEND_NTF = 3;
+}
+
+enum ChatChannel // 聊天频道
+{
+	CHAT_CHANNEL_WORLD = 0;		// 世界
+	CHAT_CHANNEL_PRIVATE = 1;   // 私聊
+	CHAT_CHANNEL_GUILD = 2;		// 公会
+	CHAT_CHANNEL_ITEM = 3;		// 喇叭	
+	CHAT_CHANNEL_ROOM = 4;		// 房间	
+}
+
+message ChatBody
+{
+	optional SendChatReq send_chat_req = 1;
+	optional SendChatNtf send_chat_ntf = 2;
+}
+
+message SendChatReq
+{
+	optional int32 channel = 1;		// 频道, ChatChannel
+	optional uint64 role_id = 2;	// 目标角色id(只有私聊才用)
+	optional string content = 3;	// 聊天内容
+}
+
+message SendChatNtf
+{
+	optional uint64 sender_id = 1;	// 发送者id
+	optional int32 channel = 2;		// 频道, ChatChannel
+	optional string content = 3;	// 聊天内容
+}

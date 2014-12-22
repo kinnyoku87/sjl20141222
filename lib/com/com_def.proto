@@ -1,0 +1,229 @@
+package proto.com;
+
+enum CommonDef
+{
+	INVALID_ID = 0;
+}
+
+enum EventID
+{
+	// 3~7和9号枚举值，只在练习模式以外的模式生效（即排除练习模式）
+	EID_BATTLE_WIN_COUNT_1V1 = 1;					// 1.1V1模式胜利次数
+	EID_BATTLE_WIN_COUNT_IDENTITY = 2;				// 2.身份模式胜利次数
+	EID_BATTLE_WIN_ALL_COUNT = 3;					// 3.战斗胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_SHANGE = 4;			// 4.商国阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_ZHOU = 5;				// 5.周国阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_YAO = 6;				// 6.妖族阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_WU = 7;				// 7.巫族阵营胜利次数
+	EID_SHOP_CONSUME_COUNT = 8;						// 8.商城消费金额
+	EID_KILL_FOE_COUNT = 9;							// 9.击杀敌方将士总数量
+	EID_CAMP_LEVEL_TOTAL = 10;						// 10.所有阵营总等级合
+	EID_CAMP_LEVEL_ZHOU = 11;						// 11.周国阵营等级
+	EID_CAMP_LEVEL_SHANGE = 12;						// 12.商国阵营等级
+	EID_CAMP_LEVEL_YAO = 13;						// 13.妖族阵营等级
+	EID_CAMP_LEVEL_WU = 14;							// 14.巫族阵营等级
+	EID_KING_HURT = 15;								// 15.对敌方王造成的伤害量(对战时对敌方王造成是伤害量，认输的只记录实际造成的伤害量)
+
+	// 成就类型，需永久记录	
+	EID_BATTLE_WIN_COUNT_1V1_HISTORY = 16;			// 16.历史1V1模式胜利次数
+	EID_BATTLE_WIN_COUNT_IDENTITY_HISTORY = 17;		// 17.历史身份模式胜利次数
+	EID_BATTLE_WIN_ALL_COUNT_HISTORY = 18;			// 18.历史战斗胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_SHANGE_HISTORY = 19;	// 19.历史商国阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_ZHOU_HISTORY = 20;	// 20.历史周国阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_YAO_HISTORY = 21;		// 21.历史妖族阵营胜利次数
+	EID_BATTLE_WIN_COUNT_CAMP_WU_HISTORY = 22;		// 22.历史巫族阵营胜利次数
+	EID_SHOP_CONSUME_COUNT_HISTORY = 23;			// 23.历史商城消费金额
+	EID_KILL_FOE_COUNT_HISTORY = 24;				// 24.历史击杀敌方将士总数量
+	
+	EID_MAX_VAL = 32;
+}
+
+enum EventType
+{
+	EVENT_TYPE_NO_PROCESS = 0;		// 不处理
+	EVENT_TYPE_ACCEPT_TASK = 1;		// 接任务后生效
+	EVENT_TYPE_EVERY_DAY_RESET = 2;	// 每天重置
+	EVENT_TYPE_FOREVER_RECORD = 3;	// 永久记录
+	EVENT_TYPE_RANK = 4;			// 排名
+}
+
+// 关卡分数
+message RoundScore
+{
+	optional uint32 id = 1;
+	optional uint32 score = 2;	
+	optional uint32 update_time = 3;
+}
+
+// 关卡完成度
+message RoundFinsh
+{
+	optional uint32 id = 1;
+	optional uint32 finsh = 2;
+	optional uint32 update_time = 3;
+}
+
+// 等级排名
+message LevelRank
+{
+	optional uint64 role_id = 1;
+	optional int32 level = 2;
+	optional uint32 update_time = 3;
+	optional int32 rank = 4;
+}
+
+// 关卡排名
+message RoundRank
+{
+	optional uint64 role_id = 1;
+	optional int32 round_id = 2;
+	optional int32 score = 3;	
+	optional uint32 update_time = 4;
+	optional int32 rank = 5;
+}
+
+// 战斗力排名
+message FightingCapacityRank
+{
+	optional uint64 role_id = 1;
+	optional int32 fighting_capacity = 2;
+	optional uint32 update_time = 3;
+	optional int32 rank = 4;
+}
+
+// 竞技场排名
+message ArenaRank
+{
+	optional uint64 role_id = 1;
+	optional int32 arena_victory_rate = 2;
+	optional int32 victory_count = 3;
+	optional int32 fail_count = 4;
+	optional uint32 update_time = 5;
+	optional int32 rank = 6;
+}
+
+// 关卡总星星
+message RoundTotalStarRank
+{
+	optional uint64 role_id = 1;
+	optional int32 round_star = 2;
+	optional uint32 update_time = 3;
+	optional int32 rank = 4;
+}
+
+// 成就点排名
+message AchievePointsRank
+{
+	optional uint64 role_id = 1;
+	optional int32 achieve_points = 2;
+	optional uint32 update_time = 3;
+	optional int32 rank = 4;
+}
+
+// 关卡平均分排名
+message RoundAveScoreRank
+{
+	optional uint64 role_id = 1;
+	optional int32 ave_score = 2;
+	optional uint32 update_time = 3;
+	optional int32 rank = 4;
+}
+
+// 好友帮助驱赶的恶鬼
+message HelpShooDemon
+{
+	optional uint64 friend_id = 1;			// 好友的id
+	optional uint32 demon_appear_time = 2;	// 恶鬼出现的时间
+	optional uint32 demon_shoo_time = 3;	// 恶鬼被驱赶的时间
+}
+
+// 擂台的擂主信息
+message RingKing
+{
+	optional uint64 role_id = 1;			// 角色id
+	optional uint32 begin_time = 2;			// 开始占领的时间
+	optional int32 king_pos = 3;			// 擂主位置(0金,1~2银,3~5铜)
+	optional int32 protect_count = 4;		// 保护次数(1次40分钟)
+	optional string name = 5;				// 名字
+}
+
+// 赠送物品
+message GivingLargessItem
+{
+	optional uint64 role_id = 1;
+	optional int32 item_id = 2;
+	optional int32 item_count = 3;	
+	optional uint64 rand_uid = 4;	
+	optional uint32 time = 5;	
+}
+
+// 索要物品
+message GivingAskItem
+{
+	optional uint64 asker_id = 1;			// 索要者的id
+	optional int32 ask_giving_item_id = 2;	// 索要的物品id
+	optional int32 ask_item_count = 3;		// 索要的物品数量
+	optional uint64 rand_uid = 4;	
+	optional uint32 time = 5;	
+}
+
+// 事件条件值
+message EventCond
+{
+	optional int32 event_id = 1;	// EventID
+	optional int32 target_id = 2;	// 区分子类型的(如建筑id,怪物id,等)
+	optional int32 res_id = 3;		// 任务id, 用来区分两个不同的任务,杀同一个怪的等
+	optional int32 value = 4;
+}
+
+// 好友
+message Friend
+{
+	optional uint64 role_id = 1;
+	optional string name = 2;
+}
+
+enum NoticeType
+{
+	NOTICE_TYPE_FRIEND_LEAVE_WORD = 0;			// 好友留言
+	NOTICE_TYPE_BATTLE_PASS_ROUNT = 1;			// 战役过关成功
+	NOTICE_TYPE_BATTLE_FRIEND_RANK_OVERTAKE = 2;// 好友排名超过自己
+	NOTICE_TYPE_FRIEND_ASK_GIVING = 3;			// 好友请求 好友礼物
+	NOTICE_TYPE_FRIEND_OPEN_WISH = 4;			// 好友开启祈福
+	NOTICE_TYPE_FRIEND_STEAL = 5;				// 被偷盗
+	NOTICE_TYPE_FRIEND_CATCH_THIEF = 6;			// 好友帮抓小偷
+	NOTICE_TYPE_FRIEND_HELP_GATHER = 7;			// 好友帮助收获
+	NOTICE_TYPE_INVITE_FRIEND_SUCCESS = 8;		// 邀请好友成功
+	NOTICE_TYPE_RING_KILLED = 9;				// 擂台被人挑战下台
+	NOTICE_TYPE_CROCK_HIT = 10;					// 好友帮助砸碎了花园坛子
+	NOTICE_TYPE_OCCUPY_STRAGNER = 11;			// 占领陌生人
+	NOTICE_TYPE_EXPEL_FRIEND = 12;				// 解救好友
+	NOTICE_TYPE_NEW_WORLD_RINGER = 13;			// 获得世界擂台擂主 
+	NOTICE_TYPE_INVITE_FRIEND = 14;				// 添加好友请求
+}
+
+// 消息留言
+message Notice
+{
+	optional uint64 from_id = 1;	// 角色id(消息来源)
+	optional uint32 send_time = 2;	// 发送时间
+	optional int32 notice_type = 3;	// 类型(NoticeType)
+	optional string title = 4;		// 标题
+	optional string content = 5;	// 内容
+	optional bool is_read = 6;		// 是否已读
+	optional int32 round_id = 7;	// 关卡id(只有类型为1有效)
+}
+
+// 自定义值
+message CustomValue
+{
+	optional int32 key = 1;
+	optional int32 value = 2;
+}
+
+// Feeds 值
+message FeedsValue
+{
+	optional int32 feeds_id = 1;
+	optional int32 count = 2;
+}

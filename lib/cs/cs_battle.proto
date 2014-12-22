@@ -1,0 +1,492 @@
+import "com/com_def.proto";
+import "com/com_role.proto";
+
+package proto.cs;
+
+enum MaxMonsterGenPos
+{
+	MAX_MONSTER_GEN_POS = 300;
+}
+
+enum CmdCodeBattle
+{
+	// 战斗参数设置
+	CC_BATTLE_GET_PARAM_REQ = 1;
+	CC_BATTLE_GET_PARAM_RES = 2; 
+	CC_BATTLE_SET_PARAM_REQ = 3;
+	CC_BATTLE_SET_PARAM_RES = 4;
+	
+	// PVE
+	CC_BATTLE_START_REQ = 5;			// 战斗数据请求
+	CC_BATTLE_START_RES = 6;			// 开始数据通知
+	CC_BATTLE_START_ACK = 7;			// 战斗开始请求
+	CC_BATTLE_START_REAL=8;				// 战斗开始通知
+	CC_BATTLE_REPORT_VICTORY_RES = 21;  // 战斗胜利通知(结算信息) 
+	CC_BATTLE_REPORT_FAILED_RES = 31;   // 战斗失败通知 
+	CC_BATTLE_PVE_SETTLEMENT_NTF = 32;	// PVE战斗清算
+
+	CC_BATTLE_QUIT_REQ = 54;			// 空指令
+	CC_BATTLE_QUIT_RES = 55;			// 空指令
+
+	// SKILL
+	CC_BATTTE_SKILL_USE_REQ = 60;		// 使用技能请求
+	CC_BATTTE_SKILL_USE_RES = 61;
+	CC_BATTTE_SKILL_USE_NTF = 62;
+
+	CC_BATTLE_STATUS_NTF = 65;			// 各种战斗状态(BUFF)通知 添加或移除
+
+	// PVP
+	CC_ARENA_ENTER_REQ = 100;			// 进入PVP服务器请求
+	CC_ARENA_ENTER_RES = 101;
+	CC_ARENA_ENTER_NTF = 102;			// 所有人进入PVP服务器后的广播
+	CC_ARENA_OVER_NTF = 103;			// PVP战斗结束广播
+	CC_ARENA_QUIT_NTF = 104;			// 角色退出房间广播
+	CC_ARENA_KING_DIE_NTF = 105;		// 王死了广播 
+
+	CC_GIVE_OUT_IDENTITY_NTF = 110;		// 发身份牌通知	
+	CC_GIVE_OUT_INIT_CARD_NTF = 111;	// 发5张初始手牌通知
+	CC_PALY_CARD_REQ = 112;				// 出牌请求
+	CC_PALY_CARD_RES = 113;		
+	CC_PALY_CARD_NTF = 114;				// 出牌广播
+	CC_UPDATE_MONSTER_NTF = 115;		// 刷怪广播(棋子)
+	CC_ROLE_CARD_COUNT_NTF = 116;		// 角色卡牌总数量广播
+	CC_ARENA_GAME_START_REQ = 117;		// 开始游戏请求
+	CC_ARENA_GAME_START_RES = 118;
+
+	CC_MOVE_CHESS_REQ = 120;			// 移动棋子请求
+	CC_MOVE_CHESS_RES = 121;
+	CC_MOVE_CHESS_NTF = 122;			// 移动棋子广播
+		
+	CC_BOUT_BEGIN_NTF = 131;			// 回合开始广播
+	CC_BOUT_END_REQ = 132;				// 回合结束请求(空指令)
+	CC_BOUT_END_NTF = 133;				// 回合结束广播			
+
+	CC_GUESS_CARD_MP_REQ = 161;			// 猜卡牌法力请求
+	CC_GUESS_CARD_MP_RES_NTF = 162;		// 猜卡牌法力结果广播(自己也会收到)
+
+	CC_GUESS_CARD_NAME_NTF = 165;		// 猜卡牌名字(通知被猜者)
+	CC_GUESS_CARD_NAME_REQ = 166;		// 猜卡牌名字请求
+	CC_GUESS_CARD_NAME_RES_NTF = 167;	// 猜卡牌名字结果广播(自己也会收到)
+
+	CC_QLY_BEGIN_NTF = 171;				// 千里眼 开始通知
+	CC_QLY_GIVE_CARD_NTF = 172;			// 千里眼 发牌通知
+	CC_QLY_OVER_NTF = 173;				// 千里眼 结束通知
+
+	CC_SFE_BEGIN_NTF = 181;				// 顺风耳 开始通知
+	CC_SFE_SEE_CARD_REQ = 182;			// 顺风耳 查看请求
+	CC_SFE_SEE_CARD_RES = 183;			
+}
+
+message BattleBody
+{
+	optional GetBattleParamRes get_battle_param_res = 1;
+	optional SetBattleParamReq set_battle_param_req = 3;
+	optional SetBattleParamRes set_battle_param_res = 4;  // 客户端设置失败,返回正确的给客户端
+	optional StartBattleReq start_battle_req = 10;
+	optional StartBattleRes start_battle_res = 12;
+	optional StartBattleAck start_battle_ack = 13;
+
+	//SKILL
+	optional SkillUseReq skill_use_req = 50;
+	optional SkillUseRes skill_use_res = 51;
+	optional SkillUseNtf skill_use_ntf = 52;
+	optional BattleStatusNtf battle_status_ntf = 55;
+
+	//PVP
+	optional EnterArenaReq enter_arena_req = 101;
+	optional EnterArenaRes enter_arena_res = 102;
+	optional EnterArenaNtf enter_arena_ntf = 103;
+	optional ArenaOverNtf arena_over_ntf = 104;
+	optional ArenaQuitNtf arena_quit_ntf = 105;
+	optional ArenaKingDieNtf arena_king_die_ntf = 106;
+
+	optional GiveOutIdentityNtf give_out_identity_ntf = 110;
+	optional GiveOutInitCard give_out_init_card_ntf = 111;
+	optional PlayCardReq play_card_req = 112;
+	optional PlayCardRes play_card_res = 113;
+	optional PlayCardNtf play_card_ntf = 114;
+	optional UpdateMonsterNtf update_monster_ntf = 115;
+	optional RoleCardCountNtf role_card_count_ntf = 116;
+
+	optional MoveChessReq move_chess_req = 120;
+	optional MoveChessRes move_chess_res = 121;
+	optional MoveChessNtf move_chess_ntf = 122;	
+
+	optional BoutBeginNtf bout_begin_ntf = 131;
+	optional BoutEndNtf bout_end_ntf = 132;
+
+	optional GuessCardMPReq guess_card_mp_req = 161;
+	optional GuessCardMPResNtf guess_card_mp_res_ntf = 162;
+	optional GuessCardNameNtf guess_card_name_ntf = 165;
+	optional GuessCardNameReq guess_card_name_req = 166;
+	optional GuessCardNameResNtf guess_card_name_res_ntf = 167;
+
+	optional QLYBeginNtf qly_begin_ntf = 171;
+	optional QLYGiveCardNtf qly_give_card_ntf = 172;
+	optional QLYOverNtf qly_over_ntf = 173;
+
+	optional SFEBeginNtf sfe_begin_ntf = 181;
+	optional SFESeeCardReq sfe_see_card_req = 182;
+	optional SFESeeCardRes sfe_see_card_res = 183;
+}
+
+message GetBattleParamRes
+{
+	repeated proto.com.CampBattleCard camp_battle_cards = 1;
+}
+
+message SetBattleParamReq
+{
+	optional proto.com.CampBattleCard camp_battle_card = 1;
+	optional bool is_delete = 2;							// 是否是删除
+}
+
+message SetBattleParamRes
+{
+	optional proto.com.CampBattleCard camp_battle_card = 1;
+	optional bool is_delete = 2;							// 是否是删除
+}
+
+message StartBattleReq
+{
+	optional int32 round_id = 1;
+}
+
+enum BattleType
+{
+	BATTLE_TYPE_COMMON = 0;	// 普通关卡	
+	BATTLE_TYPE_ARENA = 1;	// 竞技场
+}
+
+message StartBattleRes
+{
+	optional uint32 round_id = 1;			// 关卡id
+	optional int32 battle_type = 2;			// BattleType
+	optional uint32 bullet_srand = 3;       // 子弹随机种子
+	optional uint32 monster_type_srand = 4; // 生成怪物类型的种子
+	optional uint32 monster_pos_srand = 5;  // 生成怪物位置的种子
+	optional uint32 delay_test_time = 6;    // 测试延迟的时间，Client将这个值从ACK中返回
+	optional uint32 monster_die_srand = 9;	// 怪物死亡后刷新怪的种子
+	optional uint64 role_boss_id = 10;		
+	optional proto.com.RoleAttrLayer attr = 11; // 属性
+}
+
+message StartBattleAck  
+{
+	optional uint32 game_time_tick = 2;		// 服务器填充后的精准tickcount时间(ms)
+}
+
+// buff通知
+message BattleBuff
+{
+	optional uint64 object_uid = 1;		// 作用目标的id
+	optional int32  add_or_remove = 2;	// 增加还是移除(1增加,0移除)
+	optional int32  buff_id = 3;		// buff的id
+	optional int32	buff_value = 4;		// buff的效果值
+	optional int32  buff_last_time = 5;	// buff的持续时间
+	optional int32  remain_hp = 6;		// 目标处理完buff后的 体力
+	optional int32  attack = 7;			// 目标处理完buff后的 攻击力
+	optional int32  move = 8;			// 目标处理完buff后的 移动力
+	optional int32  max_hp = 9;			// 目标处理完buff后的 最大体力	
+	optional uint64  from_uid = 10;		// buff来源目标guid
+}
+
+// buff通知
+message BattleEffect
+{
+	optional uint64 object_uid = 1;		// 作用目标的uid
+	optional int32  effect_id = 2;		// effect的id, 0为数据同步用
+	optional int32  effect_value = 3;	// 效果值
+	optional int32  remain_hp = 4;		// 目标处理完effect后的 体力
+	optional int32  attack = 5;			// 目标处理完effect后的 攻击力
+	optional int32  move = 6;			// 目标处理完effect后的 移动力
+	optional int32  max_hp = 7;			// 目标处理完effect后的 最大hp	
+	optional uint64  from_uid = 8;		// effect来源目标guid
+}
+
+message SkillUseReq
+{
+	optional uint64 from_guid = 1;		// 谁使用
+	optional uint64 end_guid = 2;		// 目标
+	optional int32 skill_id = 3;		// 技能id
+	repeated int32 cost_cards = 4;		// 消耗的卡牌id
+	optional int32 skill_source = 5;	// 技能来源:0人物,1装备,2卡牌
+	repeated int32 cost_die_cards = 6;	// 消耗的墓地牌
+	repeated uint64 cost_objects = 7;	// 消耗的人物
+	optional uint64 second_guid = 8;	// 第二目标
+}
+
+message SkillUseRes
+{
+	optional uint64 from_guid = 1;		// 谁使用
+	optional uint64 end_guid = 2;		// 目标
+	optional int32 card_id = 3;
+	optional int32 skill_id = 4;		// 技能id
+	repeated BattleEffect effects = 5;	// effect列表
+	repeated BattleBuff buffs = 6;		// buff 列表
+	repeated int32 cost_cards = 7;		// 消耗的卡牌id
+	optional int32 skill_source = 9;	// 技能来源:0人物,1装备,2卡牌
+	repeated int32 cost_die_cards = 10;	// 消耗的墓地牌
+	repeated uint64 cost_objects = 11;	// 消耗的人物
+	optional int32 cost_mp = 12;		// 消耗的mp
+	optional uint64 second_guid = 13;	// 第二目标
+	optional bool success = 14;			// 技能使用是否成功
+}
+
+message SkillUseNtf
+{
+	optional SkillUseRes skill_use_res = 1;
+}
+
+message BattleStatusNtf
+{
+	optional uint64 from_role_id = 1;	// 来源角色id
+	optional int32 from_type = 2;		// 来源:0无,1魔法卡牌,2人物身上的装备
+	optional int32 card_id = 3;			// 卡牌id
+	repeated BattleBuff buffs = 4;		// Buff列表	
+	repeated BattleEffect effects = 5;	// Effect列表
+}
+////////////////////////////////////////////////////////////////////////////////////
+enum ArenaOverRet
+{
+	ARENA_OVER_RET_VICTORY = 1;	// 
+	ARENA_OVER_RET_FAILED = 2;
+}
+
+message EnterArenaReq
+{	
+	optional uint64 role_id = 1;
+	optional string check_code = 2;
+}
+
+message EnterArenaRes
+{
+	optional uint32 rand_bullet_seed = 1;
+}
+
+message EnterArenaNtf
+{
+	optional uint32 game_time_tick = 3;	// 服务器填充后的精准tickcount时间(ms)
+}
+
+enum WIN_TEAM
+{
+	WIN_TEAM_BJ_ZC = 0;	// 暴君和忠臣
+	WIN_TEAM_YS = 1;	// 义士
+	WIN_TEAM_LS = 2;	// 乱世
+}
+
+message ArenaOverNtf
+{
+	optional int32 win_team = 1;		// WIN_TEAM 胜利的队伍
+}
+
+message ArenaQuitNtf
+{
+	optional uint64 role_id = 1;
+}
+
+message ArenaKingDieNtf
+{
+	optional uint64 role_id = 1;
+	optional int32 identity_type = 2;	// IDENTITY_TYPE
+}
+
+enum IDENTITY_TYPE 
+{
+	IDENTITY_TYPE_BAOJUN = 1;		// 暴君
+	IDENTITY_TYPE_YISHI = 2;		// 义士
+	IDENTITY_TYPE_ZHONGCHEN = 3;	// 忠臣
+	IDENTITY_TYPE_LUANSHI = 4;		// 乱世	
+}
+
+// 发自己的身份牌
+message GiveOutIdentityNtf
+{
+	optional int32 identity_type = 1;	// IDENTITY_TYPE
+}
+
+// 发自己的5张手牌
+message GiveOutInitCard
+{
+	repeated int32 init_cards = 1;		// 初始卡牌列表
+	repeated int32 load_ids = 2;		// 客户端预加载用
+}
+
+message ChessPos
+{
+	optional int32 x = 1;
+	optional int32 y = 2;
+}
+
+message PlayCardReq
+{
+	optional int32 card_id = 1;		
+	optional ChessPos chess_pos = 2;		// 出牌的位置
+	optional SkillUseReq skill_use_req = 3;	// (只有放法术牌技能时才填充)
+}
+
+message PlayCardRes
+{
+	optional int32 card_id = 1;
+	optional int32 cost_mp = 2;				// 消耗法力值
+	optional int32 last_mp = 3;				// 剩余法力值
+	optional ChessPos chess_pos = 4;		// 出牌的位置
+	optional SkillUseReq skill_use_req = 5;	// (只有放法术牌技能时才填充)
+}
+
+message PlayCardNtf
+{
+	optional uint64 role_id = 1;
+	optional int32 card_id = 2;
+	optional int32 cost_mp = 3;				// 消耗法力值
+	optional int32 last_mp = 4;				// 剩余法力值
+	optional ChessPos chess_pos = 5;		// 出牌的位置
+	optional SkillUseReq skill_use_req = 6;	// (只有放法术牌技能时才填充)
+}
+
+message UpdateMonsterNtf
+{
+	optional uint64 role_id = 1;		// 谁家的
+	optional uint64 guid = 2;			// 刷出的怪物的uid
+	optional int32 card_id = 3;			// 刷出的怪物的表格静态id
+	optional int32 hp = 4;				// 体力
+	optional int32 max_hp = 5;			// 最大体力
+	optional int32 attack = 6;			// 攻击力
+	optional int32 move = 7;			// 行动力
+	optional ChessPos chess_pos = 8;	// 棋子的位置	
+	repeated BattleBuff buffs = 9;		// 出身时带的buff和给别人套的buff
+}
+
+message RoleCardCount
+{
+	optional uint64 role_id = 1;
+	optional int32 card_count = 2;
+}
+
+message RoleCardCountNtf
+{
+	repeated RoleCardCount role_card_counts = 1;
+}
+
+message MoveChessReq
+{
+	optional uint64	chess_uid = 1;		// 棋子uid
+	repeated ChessPos move_path = 2;	// 移动路径
+}
+
+message MoveChessRes
+{
+	optional uint64	chess_uid = 1;		// 棋子uid
+	repeated ChessPos move_path = 2;	// 移动路径
+}
+
+message MoveChessNtf
+{
+	optional uint64 role_id = 1;		// 角色id
+	optional uint64	chess_uid = 2;		// 棋子uid
+	repeated ChessPos move_path = 3;	// 移动路径
+}
+
+message BoutBeginNtf
+{
+	optional uint64 role_id = 1;		// 谁的回合
+	optional int32 card_count = 2;
+	repeated int32 card_ids = 3;		// 只有被发牌的人收到才有值
+	repeated int32 load_ids = 4;		// 客户端预加载用
+}
+
+message BoutEndNtf
+{
+	optional uint64 role_id = 1;		// 谁的回合
+	repeated BattleBuff buffs = 2;		// 移除的buff列表
+}
+
+message GuessCardMPReq
+{
+	optional int32 guess_mp_value = 1;	// 猜测的法力值
+	optional uint64 select_uid = 2;		// 选择需要蛊惑的目标
+}
+
+message GuessCardMPResNtf
+{
+	optional bool is_right = 1;			// 是否正确
+	optional uint64 from_role_id = 2;
+	optional uint64 target_role_id = 3;
+	optional int32 guess_mp = 4;		// 猜测的法力值
+	optional int32 real_card_id = 5;	// 实际的卡牌id
+}
+
+message GuessCardNameNtf
+{
+	repeated int32 guess_cards = 1;		// 待猜的卡牌
+	optional uint64 from_id = 2;
+	optional uint64 target_id = 3;
+}
+
+message GuessCardNameReq
+{
+	optional int32 guess_card_idx = 1;	// 待猜的卡牌索引(0~2)
+	optional int32 guess_card_id = 2;	// 猜测的卡牌id
+}
+
+message GuessCardNameResNtf
+{
+	optional bool is_right = 1;			// 是否正确
+	optional uint64 from_id = 2;
+	optional uint64 target_id = 3;
+	optional int32 guess_card_id = 4;	// 猜测的卡牌id
+	optional int32 real_card_id = 5;	// 实际的卡牌id
+	repeated int32 guess_card_list = 6;	// 猜测的卡牌列表
+}
+
+enum SKILL_ERROR_TYPE
+{
+	SER_OTHER = -1;						// 其它错误
+	SER_WAIT_CMD_ING = -2;				// 服务器等待客户端交互指令中..
+	SER_FROM_NULL = -3;					// 施法者指针为空
+	SER_SKILL_NOT_EXIST = -4;			// 技能不存在
+	SER_CHECK_ID_FAIL = -5;				// 技能施放目标错误
+	SER_NO_EQUIP_CARD = -6;				// 没有穿装备,不能使用装备技能
+	SER_EQUIP_CARD_NO_ACT_SKILL = -7;	// 身上的装备没有主动技能
+	SER_BUFF_CANT_USE_SKILL = -8;		// 冤魂缠绕 不能使用任何技能
+	SER_INTERACTIVING = -9;				// 其它技能与服务器交互中(猜法力和猜名字等)
+	SER_TIAO_ZHAN_BUFF = -10;			// 附近敌人有挑战buff
+	SER_SKILL_COST = -11;				// 技能消耗错误
+	SER_MP = -13;						// 技能消耗:法力不足
+	SER_ONCE_SKILL = -14;				// 一次性技能,已经释放过了的
+}
+
+message QLYBeginNtf
+{
+	optional uint64	role_id = 1;
+	repeated int32 card_ids = 2;
+}
+
+message QLYGiveCardNtf
+{
+	optional uint64 role_id = 1;		
+	repeated int32 card_ids = 2;
+}
+
+message QLYOverNtf
+{
+	optional uint64	role_id = 1;
+}
+
+message SFEBeginNtf
+{
+	optional uint64 role_id = 1;
+}
+
+message SFESeeCardReq
+{
+	optional int32 see_type = 1;	// 1查看手牌,2查看堆牌
+	optional int32 see_index = 2;	// 只有see_type为1时才有效,查看手牌的索引
+}
+
+message SFESeeCardRes
+{
+	optional uint64 role_id = 1;
+	repeated int32 card_ids = 2;	
+}

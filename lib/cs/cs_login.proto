@@ -1,0 +1,76 @@
+package proto.cs;
+
+enum CmdCodeLogin
+{
+	CC_LOGIN_LOGIN_REQ = 1;				// 角色登录
+	CC_LOGIN_LOGIN_RES = 2;
+	CC_LOGIN_LOGOUT_REQ = 3;
+	CC_LOGIN_LOGOUT_RES = 4;
+
+	CC_ACCOUNT_LOGIN_REQ = 11;			// 账号登录
+	CC_ACCOUNT_LOGIN_RES = 12;
+
+	CC_LOGIN_SELECT_ARENA_REQ = 21;		// 选区
+	CC_LOGIN_SELECT_ARENA_RES = 22;		
+}
+
+message LoginBody
+{
+	optional LoginReq login_req = 1;
+	optional LoginRes login_res = 2;
+	optional LogoutReq logout_req = 3;
+	optional AccountLoginReq account_login_req = 11;
+	optional AccountLoginRes account_login_res = 12;
+	optional LoginSelectArenaReq login_select_arena_req = 21;
+	optional LoginSelectArenaRes login_select_arena_res = 22;
+}
+
+message LoginReq
+{
+	optional uint64 role_id = 1;
+}
+
+message LoginRes
+{
+	optional uint32 serv_time = 2;
+}
+
+message LogoutReq
+{
+	optional uint64 role_id = 1;
+}
+
+message AccountLoginReq
+{
+	optional string open_id = 1;	// 账号
+	optional string open_key = 2;	// 密码
+}
+
+message ArenaInfo
+{
+	optional int32 arena_id = 1;	// 大区id
+	optional string arena_name = 2;	// 大区名称
+	optional string arena_ip = 3;	// 大区负载均衡服务器ip和端口(格式:192.168.1.137:8100)
+	optional int32 state = 4;		// 0优良,1繁忙,2爆满
+}
+
+message AccountLoginRes
+{
+	optional bool ret = 1;					// 登录是否成功
+	optional string desc = 2;				// 登录返回的描述信息
+	repeated ArenaInfo arena_servers = 3;	// 大区信息
+	optional uint64 uid = 4;				// 账号id
+	optional int32 last_arena_id = 5;		// 上次登陆大区
+}
+
+message LoginSelectArenaReq
+{
+	optional int32 arena_id = 1;	
+}
+
+message LoginSelectArenaRes
+{
+	optional bool ret = 1;
+	optional string desc = 2;
+	optional int32 arena_id = 3;
+}

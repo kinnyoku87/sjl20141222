@@ -1,0 +1,56 @@
+package proto.cs {
+	public final class CmdCodeBattle {
+		public static const CC_BATTLE_GET_PARAM_REQ:int = 1;
+		public static const CC_BATTLE_GET_PARAM_RES:int = 2;
+		public static const CC_BATTLE_SET_PARAM_REQ:int = 3;
+		public static const CC_BATTLE_SET_PARAM_RES:int = 4;
+		public static const CC_BATTLE_START_REQ:int = 5;
+		public static const CC_BATTLE_START_RES:int = 6;
+		public static const CC_BATTLE_START_ACK:int = 7;
+		public static const CC_BATTLE_START_REAL:int = 8;
+		public static const CC_BATTLE_REPORT_VICTORY_RES:int = 21;
+		public static const CC_BATTLE_REPORT_FAILED_RES:int = 31;
+		public static const CC_BATTLE_PVE_SETTLEMENT_NTF:int = 32;
+		public static const CC_BATTTE_SKILL_USE_REQ:int = 60;
+		public static const CC_BATTTE_SKILL_USE_RES:int = 61;
+		public static const CC_BATTTE_SKILL_USE_NTF:int = 62;
+		public static const CC_BATTLE_STATUS_NTF:int = 65;
+		public static const CC_ARENA_SELECT_ORDER_CARD_NTF:int = 71;
+		public static const CC_ARENA_SELECT_CAMP_REQ:int = 72;
+		public static const CC_ARENA_SELECT_CAMP_RES:int = 73;
+		public static const CC_ARENA_SELECT_CAMP_NTF:int = 74;
+		public static const CC_ARENA_DISCONNECT_NTF:int = 91;
+		public static const CC_ARENA_RECONNECT_REQ:int = 92;
+		public static const CC_ARENA_RECONNECT_RES:int = 93;
+		public static const CC_ARENA_RECONNECT_NTF:int = 94;
+		public static const CC_ARENA_ENTER_REQ:int = 100;
+		public static const CC_ARENA_ENTER_RES:int = 101;
+		public static const CC_ARENA_ENTER_NTF:int = 102;
+		public static const CC_ARENA_OVER_NTF:int = 103;
+		public static const CC_ARENA_QUIT_NTF:int = 104;
+		public static const CC_GIVE_OUT_IDENTITY_NTF:int = 110;
+		public static const CC_GIVE_OUT_INIT_CARD_NTF:int = 111;
+		public static const CC_PALY_CARD_REQ:int = 112;
+		public static const CC_PALY_CARD_RES:int = 113;
+		public static const CC_PALY_CARD_NTF:int = 114;
+		public static const CC_UPDATE_MONSTER_NTF:int = 115;
+		public static const CC_ROLE_CARD_COUNT_NTF:int = 116;
+		public static const CC_ARENA_GAME_START_REQ:int = 117;
+		public static const CC_ARENA_GAME_START_RES:int = 118;
+		public static const CC_MOVE_CHESS_REQ:int = 120;
+		public static const CC_MOVE_CHESS_RES:int = 121;
+		public static const CC_MOVE_CHESS_NTF:int = 122;
+		public static const CC_BOUT_BEGIN_NTF:int = 131;
+		public static const CC_BOUT_END_REQ:int = 132;
+		public static const CC_BOUT_END_NTF:int = 133;
+		public static const CC_GUESS_CARD_NAME_NTF:int = 165;
+		public static const CC_GUESS_CARD_NAME_REQ:int = 166;
+		public static const CC_GUESS_CARD_NAME_RES_NTF:int = 167;
+		public static const CC_RECEIVE_ONCE_SKILL_NTF:int = 181;
+		public static const CC_BATTLE_TRUSTEESHIP_REQ:int = 191;
+		public static const CC_BATTLE_TRUSTEESHIP_RES:int = 192;
+		public static const CC_BATTLE_FORCE_EXIT_REQ:int = 195;
+		public static const CC_BATTLE_FORCE_EXIT_RES:int = 196;
+		public static const CC_BATTLE_FORCE_EXIT_NTF:int = 197;
+	}
+}

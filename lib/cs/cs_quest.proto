@@ -1,0 +1,76 @@
+import "com/com_def.proto";
+
+package proto.cs;
+
+enum CmdCodeQuest
+{
+	CC_QUEST_GET_RES = 1;   
+	CC_QUEST_ACCEPT_REQ = 4;		// 接受任务
+	CC_QUEST_ACCEPT_RES = 5;		
+	CC_QUEST_COMMIT_REQ = 6;		// 提交任务
+	CC_QUEST_COMMIT_RES = 7;		// 
+	CC_QUEST_EVENT_COND_NTF = 8;	// 条件值变更通知
+	CC_QUEST_RESET_REQ = 9;			// 重置任务
+	CC_QUEST_RESET_RES = 10;		 
+}
+
+enum QuestType
+{
+	QUEST_TYPE_COMMON = 1;		// 普通任务
+	QUEST_TYPE_WEEKLY = 2;		// 每周重置任务
+	QUEST_TYPE_ACHIEVE = 3;		// 成就	
+}
+
+message QuestBody
+{
+	optional GetQuestRes get_quest_res = 1;
+	optional AcceptQuestReq accept_quest_req = 4;
+	optional AcceptQuestRes accept_quest_res = 5;
+	optional CommitQuestReq commit_quest_req = 6;
+	optional CommitQuestRes commit_quest_res = 7;
+	optional EventCondNtf event_cond_ntf = 8;
+	optional ResetQuestReq reset_quest_req = 9;
+	optional ResetQuestRes reset_quest_res = 10;
+}
+
+message GetQuestRes
+{
+	repeated int32 accepted_ids = 1;	// 已经接受的任务和成就,每日任务
+	repeated int32 completed_ids = 2;	// 已经完成的成就和任务,每日任务	
+	repeated proto.com.EventCond event_conds = 3;
+}
+
+message CommitQuestReq
+{
+	optional int32 res_id = 1;
+}
+
+message CommitQuestRes
+{
+	optional int32 res_id = 1;
+}
+
+message AcceptQuestReq
+{
+	optional int32 res_id = 1;
+}
+
+message AcceptQuestRes
+{
+	optional int32 res_id = 1;
+}
+
+message EventCondNtf
+{
+	repeated proto.com.EventCond event_conds = 1;
+}
+
+message ResetQuestReq
+{
+	optional int32 res_id = 1;
+}
+
+message ResetQuestRes
+{
+	optional int32 res_id = 1;	// 重置成功后,删除此任务
+}

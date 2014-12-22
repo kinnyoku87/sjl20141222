@@ -1,0 +1,67 @@
+import "com/com_role.proto";
+
+package proto.com;
+
+enum RoomMod
+{
+	ROOM_MOD_1V1 = 0;			// 1V1模式
+	ROOM_MOD_PRACTICE = 1;		// 练习模式
+	ROOM_MOD_IDENTITY = 2;		// 身份模式
+	ROOM_MOD_ARENA = 3;			// 竞技场模式
+}
+
+enum RoomState
+{
+	ROOM_STATE_OPEN = 0;		// 开放
+	ROOM_STATE_MATCHING = 1;	// 比赛中
+}
+
+enum RoomStage
+{
+	ROOM_STAGE_LOW = 0;			// 初级
+	ROOM_STAGE_MIDDLE = 1;		// 中级
+	ROOM_STAGE_HIGH = 2;		// 高级
+}
+
+message RoomBaseInfo
+{
+	optional int64 room_id = 1;
+	optional uint64 ower_id = 2;		// 房主, 创建房间时, 后台忽略此字段
+	optional int32 state = 3;			// 房间状态
+	optional string name = 4;			// 房间名
+	optional string pwd = 5;			// 密码
+	optional int32 mod = 6;				// RoomMod
+	optional int32 round_id = 7;		// 地图id
+	optional int32 stage = 8;			// RoomStage
+	optional int32 member_count = 9;	// 房间里的人数
+	optional string pvp_ip = 10;		// pvp服务器的ip信息(ip:port)
+}
+
+message BattleMemberInfo
+{
+	optional uint64 uid = 1;
+	optional proto.com.RoleInfo role_info = 2;				// 基本数据
+	optional proto.com.RoleAttrInfo role_attr_info = 3;		// 属性数据
+	optional RoomMemberInfo room_member_info = 4;			// 房间成员数据
+	repeated proto.com.CampBattleCard camp_battle_cards = 5;// 卡牌数据
+	optional int32 card_bag_index = 6;						// 卡牌包索引	
+	optional bool use_bag_card = 7;							// 是否使用卡牌包
+	optional bool is_robot = 10;							// 是否是机器人
+	
+}
+
+enum CAMP_ID
+{
+	CAMP_ID_SHANG = 1;		// 商国
+	CAMP_ID_ZHOU = 2;		// 周国
+	CAMP_ID_YAO = 3;		// 妖
+	CAMP_ID_WU = 4;			// 巫
+}
+
+message RoomMemberInfo
+{
+	optional uint64 role_id = 1;
+	optional bool ready = 2;
+	optional int32 chair_id = 3;
+	optional int32 camp_id = 4;			// CAMP_ID
+}

@@ -1,0 +1,89 @@
+import "com/com_role.proto";
+
+package proto.cs;
+
+enum CmdCodeRole
+{
+	CC_ROLE_GET_LIST_REQ = 1;
+	CC_ROLE_GET_LIST_RES = 2;
+	CC_ROLE_CREATE_REQ = 3;
+	CC_ROLE_CREATE_RES = 4;
+	CC_ROLE_GET_RES = 8;
+	CC_ROLE_GET_SIMPLE_REQ = 11;
+	CC_ROLE_GET_SIMPLE_RES = 12;
+	
+	CC_ROLE_ATTR_NTF = 20;  // 当服务器的角色属性发生变化, 客户端不知道, 用这个通知
+}
+
+enum RoleDef
+{
+	MAX_ROLE_NAME_LEN = 32;
+}
+
+message RoleBody
+{
+	optional GetRoleListRes get_role_list_res = 2;
+	optional CreateRoleReq create_role_req = 3;
+	optional CreateRoleRes create_role_res = 4;
+	optional GetRoleRes get_role_res = 6;
+	optional GetSimpleRoleReq get_simple_role_req = 7;
+	optional GetSimpleRoleRes get_simple_role_res = 8;
+	optional RoleAttrNtf role_attr_ntf = 9;
+}
+
+message GetRoleListRes
+{
+	optional string open_id = 1;
+	optional uint64 uid = 2;		// 对网关进行SignReq时的参数
+	repeated proto.com.LoginRoleInfo login_role_infos = 3;
+}
+
+enum RoleGender
+{
+	RG_NONE = 1;
+	RG_MALE = 2;
+	RG_FEMALE = 3;
+}
+
+message CreateRoleReq
+{
+	optional string name = 1;
+	optional uint32 gender = 2; // enum RoleGender
+	optional string icon = 3;	// 头像(客户端自定义,以后可能是平台的url图片链接)
+}
+
+message CreateRoleRes
+{
+	optional proto.com.LoginRoleInfo role_info = 1;
+}
+
+
+message GetRoleRes
+{
+	optional proto.com.RoleInfo role_info = 1;
+	repeated proto.com.CampLevel camp_levels = 3;
+}
+
+message GetSimpleRoleReq
+{
+	optional uint64 id = 1;	// 想获取的角色ID，这个ID可以填别人
+	optional uint64 requester_id = 2;	// client 忽略
+}
+
+message GetSimpleRoleRes
+{
+	optional uint64 id = 1;		
+	optional string name = 2;				// 名字
+	optional int32 gender = 3;				// 性别
+	optional string icon = 4;				// 头像
+	optional int32 level = 5;				// 等级
+	optional int32 attack = 6;				// 攻击力
+	optional int32 move = 7;				// 移动力
+	optional int32 hp = 8;					// 体力
+}
+
+message RoleAttrNtf
+{
+	optional proto.com.RoleInfo role_info = 1;
+	repeated proto.com.CampLevel camp_levels = 3;
+}

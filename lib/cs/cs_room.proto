@@ -1,0 +1,231 @@
+import "com/com_room.proto";
+
+package proto.cs;
+
+enum CmdCodeRoom
+{
+	CC_ROOM_CREATE_REQ = 1;			// 创建房间请求
+	CC_ROOM_CREATE_RES = 2;
+	CC_ROOM_FIND_REQ = 9;			// 查找房间请求
+	CC_ROOM_FIND_RES = 10;	
+	CC_ROOM_MODIFY_PARAM_REQ = 11;	// 修改房间参数
+	CC_ROOM_MODIFY_PARAM_NTF = 13;
+	CC_ROOM_JOIN_REQ = 17;			// 加入房间请求
+	CC_ROOM_JOIN_RES = 18;
+	CC_ROOM_JOIN_NTF = 19;
+	CC_ROOM_QUIT_REQ = 23;			// 退出请求
+	CC_ROOM_QUIT_NTF = 25;
+	CC_ROOM_KICK_REQ = 31;			// 踢人请求
+	CC_ROOM_KICK_NTF = 33;
+	CC_ROOM_SET_CHAIR_STATE_REQ = 34;// 设置桌子状态请求
+	CC_ROOM_SET_CHAIR_STATE_NTF = 35;	
+
+	CC_ROOM_READY_MATCH_REQ = 45;	// 房间成员设置准备状态
+	CC_ROOM_READY_MATCH_NTF = 48;
+	CC_ROOM_STOP_MATCH_NTF = 52;	// 停止匹配通知
+	CC_ROOM_START_MATCH_REQ = 53;	// 房主开始游戏请求(空指令)
+	CC_ROOM_START_STATE_NTF = 54;	// 房主点开始通知(空指令)
+	CC_ROOM_START_MATCH_NTF = 55;
+
+	CC_ROOM_QUICK_JOIN_REQ = 59;	// 快速加入
+	CC_ROOM_QUICK_JOIN_RES = 60;
+
+	CC_ROOM_SELECT_CAMP_REQ = 61;	// 选择阵营请求(配置套牌)
+	CC_ROOM_SELECT_CAMP_RES = 62;		
+	CC_ROOM_SELECT_CAMP_NTF = 63;	// 选择阵营广播
+
+	CC_ROOM_MATCH_JOIN_REQ = 71;	// 加入快速撮合队列请求
+	CC_ROOM_MATCH_JOIN_RES = 72;	
+	CC_ROOM_MATCH_QUIT_REQ = 73;	// 退出快速撮合队列请求(空指令)
+	CC_ROOM_MATCH_QUIT_RES = 74;	// (空指令)
+	CC_ROOM_CHECK_CODE_NTF = 80;	// 验证码通知
+}
+
+message RoomBody
+{
+	optional CreateRoomReq create_room_req = 1;
+	optional CreateRoomRes create_room_res = 2;
+	optional FindRoomReq find_room_req = 8;
+	optional FindRoomRes find_room_res = 9;
+	optional ModifyRoomParamReq modify_room_param_req = 10;
+	optional ModifyRoomParamNtf modify_room_param_ntf = 11;
+	optional JoinRoomReq join_room_req = 19;
+	optional JoinRoomRes join_room_res = 20;
+	optional JoinRoomNtf join_room_ntf = 21;
+	optional QuitRoomNtf quit_room_ntf = 23;
+	optional KickRoomReq kick_room_req = 24;
+	optional KickRoomNtf kick_room_ntf = 26;
+	optional SetChairStateReq set_chair_state_req = 27;
+	optional SetChairStateNtf set_chair_state_ntf = 28;
+	optional ReadyMatchReq ready_match_req = 29;
+	optional ReadyMatchNtf ready_match_ntf = 31;
+	optional StartMatchNtf start_match_ntf = 38;
+	optional QuickJoinRoomReq quick_join_room_req = 42;
+	optional SelectCampReq select_camp_req = 43;
+	optional SelectCampRes select_camp_res = 44;
+	optional SelectCampNtf select_camp_ntf = 45;	
+	optional MatchJoinReq match_join_req = 71;
+	optional MatchJoinRes match_join_res = 72;
+	optional CheckCodeNtf check_code_ntf = 80;
+}
+
+message CreateRoomReq
+{
+	optional proto.com.RoomBaseInfo room_base_info = 1;
+	optional proto.com.BattleMemberInfo battle_member_info = 2;	// client忽略, zoned填充传给lobbyd
+}
+
+message CreateRoomRes
+{
+	optional proto.com.RoomBaseInfo room_base_info = 1;
+	optional string check_code = 2;	// 检验码
+	optional int32 chair_id = 3;	// 坐位号id
+}
+
+// 下面的optional条件, 如果没有设置默认是不过滤
+message FindRoomReq 
+{
+	optional int32 offset = 1;
+	optional int32 room_count = 2;
+	optional int64 room_id = 3;
+	optional int32 mod = 4;			// RoomMod
+	optional int32 stage = 5;		// 级别
+	optional bool is_absence = 6;	// 缺人
+}
+
+message FindRoomRes
+{
+	optional int32 offset = 1;
+	optional int32 total_room_count = 2;
+	repeated proto.com.RoomBaseInfo room_base_info = 3;
+}
+
+message ModifyRoomParamReq
+{
+	optional string room_name = 2;	// 房间名字
+	optional string room_pwd = 3;	// 房间密码
+	optional uint64 owner_id = 4;	// 房主的id
+}
+
+message ModifyRoomParamNtf
+{
+	optional string room_name = 2;	// 房间名字
+	optional string room_pwd = 3;	// 房间密码
+	optional uint64 owner_id = 4;	// 房主的id
+}
+
+message JoinRoomReq
+{
+	optional int64 room_id = 1;
+	optional string pwd = 3;
+	optional proto.com.BattleMemberInfo battle_member_info = 4;	// 客户端忽略, zoned带role info给lobbyd
+}
+
+message JoinRoomRes
+{
+	optional proto.com.RoomBaseInfo room_base_info = 1;
+	repeated int32 close_chairs = 2;				// 关闭的桌子
+	repeated proto.com.RoomMemberInfo members  = 3;	// 房间成员信息
+	optional string check_code = 4;					// 检验码
+	optional int32 chair_id = 5;					// 坐位号id
+}
+
+message JoinRoomNtf
+{
+	optional uint64 joiner_id = 1;
+	optional int32 chair_id = 2;
+}
+
+message QuitRoomNtf
+{
+	optional uint64 quiter_id = 1;
+}
+
+message KickRoomReq
+{
+	optional uint64 kickeder_id = 2;
+}
+
+message KickRoomNtf
+{
+	optional uint64 kickeder_id = 1;
+}
+
+message SetChairStateReq
+{
+	optional int32 pos = 1;			// 房间坐位
+	optional bool open = 2;			// 是否开放
+}
+
+message SetChairStateNtf
+{
+	optional int32 pos = 1;			// 房间坐位
+	optional bool open = 2;			// 是否开放
+}
+
+message CheckCodeNtf
+{
+	optional string check_code = 1;	// 验证码
+}
+
+// 非房主发(准备还是取消)
+message ReadyMatchReq    
+{
+	optional bool ready = 1;		// 是否准备
+}
+
+message ReadyMatchNtf
+{
+	optional uint64 readyer_id = 1;
+	optional bool ready = 2;		// 是否准备
+}
+
+// 所有的人收到包括房主
+message StartMatchNtf   
+{
+	optional proto.com.RoomBaseInfo room_base_info = 1;
+	repeated proto.com.BattleMemberInfo members = 2;
+}
+
+message QuickJoinRoomReq
+{
+	optional int32 mod = 1;	// RoomMod
+	optional proto.com.BattleMemberInfo battle_member_info = 3;	// client忽略, zoned填充传给lobbyd
+}
+
+message SelectCampReq
+{
+	optional int32 camp_id = 1;		// CAMP_ID
+	optional int32 bag_index = 2;	
+	optional bool use_bag_card = 3;
+}
+
+message SelectCampRes
+{
+	optional int32 camp_id = 1;		// CAMP_ID
+	optional int32 bag_index = 2;	
+	optional bool use_bag_card = 3;
+}
+
+message SelectCampNtf
+{
+	optional uint64 role_id = 1;
+	optional int32 camp_id = 2;		// CAMP_ID
+}
+
+message MatchJoinReq
+{
+	optional int32 mod = 1;			// RoomMod
+	optional int32 camp_id = 2;		// CAMP_ID
+	optional proto.com.BattleMemberInfo battle_member_info = 3;	// client忽略, zoned填充传给lobbyd
+	optional int32 bag_index = 4;	
+	optional bool use_bag_card = 5;
+}
+
+message MatchJoinRes
+{
+	optional int32 mod = 1;			// RoomMod
+	optional int32 camp_id = 2;		// CAMP_ID
+	optional int32 bag_index = 4;	
+	optional bool use_bag_card = 5;
+}

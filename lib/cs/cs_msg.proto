@@ -1,0 +1,61 @@
+import "cs/cs_auth.proto";
+import "cs/cs_login.proto";
+import "cs/cs_role.proto";
+import "cs/cs_battle.proto";
+import "cs/cs_quest.proto";
+import "cs/cs_room.proto";
+import "cs/cs_chat.proto";
+
+package proto.cs;
+
+enum CmdType
+{
+	CT_AUTH = 1;
+	CT_LOGIN = 3;
+	CT_ROLE = 5;
+	CT_QUEST = 7;
+	CT_BATTLE = 11;
+	CT_ROOM = 17;
+	CT_CHAT = 23;
+}
+
+enum ErrorCode     // 定义了通用的失败和成功的ErrorCode, 其他细节错误各种协议模块单独定义
+{
+	EC_FAILED = -1;
+	EC_SUCCESS = 0;
+	
+	// 角色
+	EC_ROLE_EXISTED = 200;    // 角色已经存在
+	EC_ROLE_NO_EXISTED = 203; // 角色不存在
+	EC_ROLE_NAME_EXISTED = 206;
+}
+
+enum MsgDef
+{
+	MSG_LEN_SIZE = 4;
+	MAX_MSG_LEN = 262144;	// 256 K
+	MSG_HEAD_LEN = 10;
+
+	MSG_PHP_LEN_SIZE = 10;	// php的msglen数据长度(php只能用文本描述,比较长)
+	MSG_PHP_HEAD_LEN = 20;	// php的msghead数据长度(php只能用文本描述,比较长)
+}
+
+message MsgHead
+{
+	optional fixed32 seq = 1;
+	optional fixed32 cmd = 2;  // 高16bit为cmd type, 低16位为cmd code 
+}
+
+// 这个消息体间接地写一个AuthBody之类的东西，目的是把特定的模块消息体放到各自的模块文件中
+// 如果直接在MsgBody放具体消息体(如SignReq&SignRes), MsgBody的行数会很多, 不容易维护
+message MsgBody
+{
+	optional int32 ret = 1;   // 请求包不填, 回应包返回值, 默认EC_SUCCESS
+	optional AuthBody auth_body = 2;
+	optional LoginBody login_body = 3;
+	optional RoleBody role_body = 4;
+	optional BattleBody battle_body = 6;
+	optional QuestBody quest_body = 9;
+	optional RoomBody room_body = 12;
+	optional ChatBody chat_body = 14;
+}

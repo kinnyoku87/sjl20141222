@@ -1,0 +1,1 @@
+protoc.exe --plugin=protoc-gen-as3="as_plugin\protoc-gen-as3.bat" --as3_out=E:/shenzhen_B/S1_Code/FlashClient/client/protobufs com/com_role.proto com/com_def.proto com/com_item.proto com/com_room.proto

@@ -1,0 +1,41 @@
+package proto.cs;
+
+enum CmdCodeSign
+{
+	CC_AUTH_SIGN_REQ = 1;
+	CC_AUTH_SIGN_RES = 2;
+	CC_AUTH_HELLO = 3;
+	CC_AUTH_ZONE_IP_REQ = 4;
+	CC_AUTH_ZONE_IP_RES = 5;
+}
+
+message AuthBody
+{
+	optional SignReq sign_req = 1;
+	optional SignRes sign_res = 2;
+	optional SignZoneIPReq sign_zone_ip_req = 3;
+	optional SignZoneIPRes sign_zone_ip_res = 4;
+}
+
+message SignReq
+{
+	optional uint64 uid = 1;
+	optional string sign_str = 2;
+	optional int32 cb_data = 3;   // callback data客户端透传数据
+}
+
+message SignRes
+{
+	optional int32 cb_data = 1;   // 客户端透传数据
+}
+
+message SignZoneIPReq
+{
+	optional uint64 uid = 1;
+	optional string sign_str = 2;
+}
+
+message SignZoneIPRes
+{
+	optional string zone_ip = 1;
+}

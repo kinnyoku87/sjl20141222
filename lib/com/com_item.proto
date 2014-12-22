@@ -1,0 +1,61 @@
+package proto.com;
+
+message ItemEquipAttr
+{
+	optional uint32 equip_attr_type = 1;
+	optional uint32 equip_attr_val = 2;
+}
+
+message ItemBaseInfo
+{
+	optional uint64 id = 1;
+	optional int32 res_id = 2;
+	optional int32 overlapp_count = 3;
+	optional uint32 create_time = 4;	// 创建时间
+	optional bool largess = 5;			
+}
+
+message ItemInfo
+{
+	optional ItemBaseInfo base_info = 1;
+	optional uint32 level = 2;				// 装备等级, 非装备道具忽略
+	repeated ItemEquipAttr equip_attrs = 3;	
+	optional int32 hole_count = 4;			// 孔的数量
+	repeated int32 gem_ids = 5;				// 宝石列表
+}
+
+// 使用方式
+enum ItemUseType
+{
+	ITEM_USE_TYPE_RES=0;		// 0.资源类，不使用
+	ITEM_USE_TYPE_WAREHOUSE=1;	// 1.仓库点击使用
+	ITEM_USE_TYPE_BATTLE=2;		// 2.战斗中使用
+	ITEM_USE_TYPE_SPECI=3;		// 3.特定使用
+	ITEM_USE_TYPE_NO=4;			// 4.无使用方式
+}
+
+message CoolTime
+{
+	optional int32 cd_type = 1;		// cd 类型
+	optional int32 cd_time = 2;		// cd 时间
+	optional int32 begin_time = 3;	// 开始时间
+	optional int32 from_type = 4;	// 产生类型ItemUseType
+	optional int32 item_res_id = 6;	// 物品静态id
+	optional int32 item_level = 7;	// 物品等级
+	optional int32 skill_id = 8;	// 子弹id
+	optional int32 skill_level = 9;	// 子弹等级
+}
+
+// 商店限量物品
+message ShopLimitItem
+{
+	optional int32 item_res_id = 1;
+	optional int32 item_count = 2;
+	optional uint32 update_time = 3;
+}
+
+message OneItem
+{
+	optional int32 item_res_id = 1;
+	optional int32 count = 2;
+}
