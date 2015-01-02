@@ -1,0 +1,21 @@
+<animation>
+
+	<target name="common">
+		<clip name="eight" frameRate="12">  1 -8  </clip>
+	</target>
+		
+	<target name="flight">
+		<clip name="right_stand" frameRate="1">  1           </clip>
+		<clip name="right_jump"  frameRate="10"> 1 -  14     </clip>
+		<clip name="right_run"   frameRate="10"> 14 - 1      </clip>
+		<clip name="left_jump"   frameRate="10"> 1-3         </clip>
+		<clip name="left_run"    frameRate="10"> 1-3,1-3,1-3 </clip>
+	</target>
+	
+	<target name="tornado_A">
+		<clip name="start" frameRate="11">  1-4  </clip>
+		<clip name="loop" frameRate="11">  5-8  </clip>
+		<clip name="complete" frameRate="11">  9-12  </clip>
+	</target>
+	
+</animation>

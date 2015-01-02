@@ -1,0 +1,63 @@
+[ Http Response ] {"ctx":{"user_id":"","sessionid":"","chan":"0","serial":"06314","mver":"1","ter":"WEB"},"req":{"password":"ff2f24f8b6d253bb5a8bc55728ca7372","account":"rrr","t":"login"}}
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 381,334 个字节
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 381,334 个字节
+警告: 忽略 http://fpdownload.adobe.com/pub/swz/crossdomain.xml 中策略文件的 'secure' 属性。仅在 HTTPS 和套接字策略文件中允许使用 'secure' 属性。有关详细信息，请参阅 http://www.adobe.com/go/strict_policy_files_cn。
+
+登陆使用时间：0.677秒
+Clock:started距离上次停止所用时间 1
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 1,300,300 个字节
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 182,140 个字节
+************************** {"ctx":{"user_id":"1643804","sessionid":"74c247cda9ba48e47a0d11a618ce169a","chan":"0","serial":"10123","mver":"1","ter":"WEB"},"req":{"order":1,"module":2,"t":"sequence","type":1}}
+
+************************** {"ctx":{"user_id":"1643804","sessionid":"74c247cda9ba48e47a0d11a618ce169a","chan":"0","serial":"50175","mver":"1","ter":"WEB"},"req":{"t":"getuserinfo"}}
+************************** {"ctx":{"user_id":"1643804","sessionid":"74c247cda9ba48e47a0d11a618ce169a","chan":"0","serial":"22334","mver":"1","ter":"WEB"},"req":{"bet_time":"20","blind_area_end":1,"room_type":"2","t":"getroominfo","hide_room_empty":"0","hide_room_full":"0","blind_area_start":1}}
+[ Http Response ] sequence.do length: 11164
+[ Http Response ] sequence.do
+[ Http Response ] getuserinfo.do length: 1640
+[ Http Response ] getuserinfo.do
+[ Http Response ] getroomlist.do length: 11396
+[ Http Response ] getroomlist.do
+
+
+************************** {"req":{"password":"ff2f24f8b6d253bb5a8bc55728ca7372","account":"rrr","t":"login"},"ctx":{"mver":"1","user_id":"","ter":"WEB","chan":"0","sessionid":"","serial":"04373"}}
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 381,334 个字节
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 381,334 个字节
+登陆使用时间：0.673秒
+Clock:started距离上次停止所用时间 1
+警告: 忽略 http://fpdownload.adobe.com/pub/swz/crossdomain.xml 中策略文件的 'secure' 属性。仅在 HTTPS 和套接字策略文件中允许使用 'secure' 属性。有关详细信息，请参阅 http://www.adobe.com/go/strict_policy_files_cn。
+
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 1,300,300 个字节
+[SWF] E:\深圳_A\szqp\01_code\dzpk\02_front_flash\front_md\TexasPoker\bin-debug\asset\ui\FormUI.swf - 解压缩后为 182,140 个字节
+************************** {"req":{"order":1,"module":2,"t":"sequence","type":1},"ctx":{"mver":"1","user_id":"1643792","ter":"WEB","chan":"0","sessionid":"936c2356e5e1da445c6df4abbd61f641","serial":"16695"}}
+
+************************** {"req":{"t":"getuserinfo"},"ctx":{"mver":"1","user_id":"1643792","ter":"WEB","chan":"0","sessionid":"936c2356e5e1da445c6df4abbd61f641","serial":"71052"}}
+************************** {"req":{"blind_area_end":1,"bet_time":"20","t":"getroominfo","blind_area_start":1,"hide_room_empty":"0","room_type":"2","hide_room_full":"0"},"ctx":{"mver":"1","user_id":"1643792","ter":"WEB","chan":"0","sessionid":"936c2356e5e1da445c6df4abbd61f641","serial":"80352"}}
+
+[ Http Response ] login.do length: 412
+[ Http Response ] sequence.do length: 100
+[ Http Response ] sequence.do
+[ Http Response ] getuserinfo.do length: 104
+[ Http Response ] getuserinfo.do
+[ Http Response ] getroomlist.do length: 104
+
+
+
+
+{"req":{"password":"ff2f24f8b6d253bb5a8bc55728ca7372","account":"rrr","t":"login"},"ctx":{"mver":"1","user_id":"","ter":"WEB","chan":"0","sessionid":"","serial":"19633"}}
+{"req":{"password":"ff2f24f8b6d253bb5a8bc55728ca7372","account":"rrr","t":"login"},"ctx":{"ter":"WEB","user_id":"","chan":"0","serial":"88356","sessionid":"","mver":"1"}}
+
+
+
+
+eyJyZXEiOnsicGFzc3dvcmQiOiJmZjJmMjRmOGI2ZDI1M2JiNWE4YmM1NTcyOGNhNzM3MiIsImFjY291bnQiOiJycnIiLCJ0IjoibG9naW4ifSwiY3R4Ijp7Im12ZXIiOiIxIiwidXNlcl9pZCI6IiIsInRlciI6IldFQiIsImNoYW4iOiIwIiwic2Vzc2lvbmlkIjoiIiwic2VyaWFsIjoiNTMzMTYifX0=
+
+
+eyJyZXEiOnsicGFzc3dvcmQiOiJmZjJmMjRmOGI2ZDI1M2JiNWE4YmM1NTcyOGNhNzM3MiIsImFjY291bnQiOiJycnIiLCJ0IjoibG9naW4ifSwiY3R4Ijp7InRlciI6IldFQiIsInVzZXJfaWQiOiIiLCJjaGFuIjoiMCIsInNlcmlhbCI6IjI1MjczIiwic2Vzc2lvbmlkIjoiIiwibXZlciI6IjEifX0=
+
+
+
+
+
+eyJjdHgiOnsiZXJyIjoiMCIsIm12ZXIiOiIwIiwicmVzdWx0IjoiIiwic2Vzc2lvbmlkIjoiOTM2YzIzNTZlNWUxZGE0NDVjNmRmNGFiYmQ2MWY2NDEifSwicmVzcCI6eyJhY2NvdW50IjoicnJyIiwiZXZlcnlkYXljaGlwIjoiMSIsImhhcHB5R2VtIjoiMCIsImlzZmlyc3QiOiIxIiwibWVzc2FnZW51bSI6IjEiLCJub3RpY2UiOiIiLCJudW1iZXIiOiIiLCJwYXNzd29yZCI6ImZmMmYyNGY4YjZkMjUzYmI1YThiYzU1NzI4Y2E3MzcyIiwicG9pbnRkYXkiOjEsInJvb21JZCI6IjAiLCJ0IjoibG9naW4iLCJ1c2VyX2lkIjoiMTY0Mzc5MiJ9fQ==
+
+eyJjdHgiOnsiZXJyIjoiMCIsIm12ZXIiOiIwIiwicmVzdWx0IjoiIiwic2Vzc2lvbmlkIjoiNzRjMjQ3Y2RhOWJhNDhlNDdhMGQxMWE2MThjZTE2OWEifSwicmVzcCI6eyJhY2NvdW50IjoicnJyIiwiZXZlcnlkYXljaGlwIjoiMCIsImhhcHB5R2VtIjoiMCIsImlzZmlyc3QiOiIxIiwibWVzc2FnZW51bSI6IjEiLCJub3RpY2UiOiIiLCJudW1iZXIiOiIiLCJwYXNzd29yZCI6ImZmMmYyNGY4YjZkMjUzYmI1YThiYzU1NzI4Y2E3MzcyIiwicG9pbnRkYXkiOjAsInJvb21JZCI6IjAiLCJ0IjoibG9naW4iLCJ1c2VyX2lkIjoiMTY0MzgwNCJ9fQ==
